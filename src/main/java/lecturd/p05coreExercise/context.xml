@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!-- Computer bean, Memory bean 만들기 -->
+<!-- Computer bean에 Memory bean 주입 -->
+
+<bean class="lecturd.p05coreExercise.Computer">
+	<property name="memory" ref="memory"></property>
+</bean>
+
+<bean id="memory" class="lecturd.p05coreExercise.Memory"></bean>
+
+</beans>

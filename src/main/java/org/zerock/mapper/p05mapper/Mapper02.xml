@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.p05mapper.Mapper02">
+	<!-- namespace : 인터페이스 -->
+
+	<select id="getLastNameById" 
+			resultType="string">
+		SELECT LastName
+		FROM Employees
+		WHERE EmployeeID = #{id}
+	</select>
+	
+	<select id="getCustomerNameById"
+			resultType="string">
+		SELECT customerName
+		FROM Customers
+		WHERE CustomerID = #{id}
+	</select>
+	
+	<select id="getProductNameByCategory"
+			resultType="string">
+		SELECT p.ProductName
+		FROM Products p JOIN Categories c
+		ON c.categoryID = p.categoryID
+		WHERE c.CategoryName = #{category}
+	</select>
+	
+	<select id="getProductNamesByCategoryAndPrice" resultType="string">
+		<![CDATA[
+		SELECT p.ProductName
+		FROM Products p JOIN Categories c
+		ON c.categoryID = p.categoryID
+		WHERE c.CategoryName = #{category} AND p.price < #{price}
+		]]>
+	</select>
+	
+	<select id="getSupplierNamesByCityAndCountry" resultType="string">
+		SELECT SupplierName
+		FROM Suppliers
+		WHERE City = #{city} AND Country = #{country}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

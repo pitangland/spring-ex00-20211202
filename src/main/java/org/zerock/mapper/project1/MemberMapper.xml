@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.project1.MemberMapper">
+
+	<insert id="insert" useGeneratedKeys="true" keyColumn="id"
+		keyProperty="id">
+		INSERT INTO Member (id, password, nickName, email, address)
+		VALUES (#{id}, #{password}, #{nickName}, #{email}, #{address})
+	</insert>
+	
+	<select id="selectByNickName" resultType="org.zerock.domain.project1.MemberVO">
+		SELECT id, password, nickName, email, address, inserted
+		FROM Member
+		WHERE nickName = #{nickName}
+	</select>
+
+	<select id="select"
+		resultType="org.zerock.domain.project1.MemberVO">
+		SELECT id, password, nickName, email, address, inserted
+		FROM Member
+		WHERE id=#{id}
+	</select>
+
+	<update id="update">
+		UPDATE Member
+		SET
+			password=#{password},
+			nickName=#{nickName},
+			email=#{email},
+			address=#{address}
+		WHERE
+			id=#{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM Member WHERE id=#{id}
+	</delete>
+
+	<select id="list"
+		resultType="org.zerock.domain.project1.MemberVO">
+		SELECT m.id, m.password, m.email, m.address, m.inserted, m.nickName, COUNT(b.id) numberOfBoard
+		FROM Member m LEFT JOIN Board b ON m.id = b.writer
+		GROUP BY m.id
+		ORDER BY m.inserted DESC
+	</select>
+
+	<select id="listPage"
+		resultType="org.zerock.domain.project1.MemberVO">
+		SELECT m.id, m.password, m.email, m.address, m.inserted, m.nickName, COUNT(b.id) numberOfBoard
+		FROM Member m LEFT JOIN Board b ON m.id = b.writer
+		GROUP BY m.id
+		ORDER BY m.inserted DESC
+		LIMIT #{from}, #{items}
+	</select>
+	
+	<select id="getCountRows" resultType="int">
+		SELECT COUNT(*) FROM Member
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
